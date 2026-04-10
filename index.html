@@ -379,10 +379,10 @@
     const countdownEl = document.getElementById("countdown");
 
     function getNextMidnight() {
-      const now = new Date();
-      const midnight = new Date(now);
-      midnight.setHours(24, 0, 0, 0); // próxima medianoche
-      return midnight;
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setSeconds(now.getSeconds() + 5); // se desbloquea en 5 segundos
+  return midnight;
     }
 
     function formatTime(ms) {
