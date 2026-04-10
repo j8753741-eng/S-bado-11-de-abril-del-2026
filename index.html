@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carta para mi amor</title>
+
+  <style>
+    :root{
+      --bg1:#05040a;
+      --bg2:#0b0714;
+      --card:#0f0b1c;
+      --text:#f2ecff;
+      --muted:#cdb9ff;
+      --soft:#1b1230;
+      --purple:#b86bff;
+      --purple2:#7a2cff;
+      --pink:#ff4fd8;
+      --line:rgba(184,107,255,.18);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: "Georgia", serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(184,107,255,.18), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255,79,216,.12), transparent 45%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px;
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    /* Fondo con brillo suave */
+    .aurora{
+      position:fixed;
+      inset:-200px;
+      background:
+        radial-gradient(circle at 10% 30%, rgba(122,44,255,.18), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,79,216,.12), transparent 45%),
+        radial-gradient(circle at 40% 90%, rgba(184,107,255,.10), transparent 40%);
+      filter: blur(60px);
+      opacity:.8;
+      z-index:-2;
+      animation: floatGlow 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGlow{
+      from{ transform: translateY(-10px) translateX(-10px) scale(1); }
+      to{ transform: translateY(10px) translateX(10px) scale(1.05); }
+    }
+
+    /* Marco elegante */
+    .frame{
+      width:min(860px, 100%);
+      position:relative;
+      padding:28px;
+      border-radius:28px;
+      background: linear-gradient(135deg, rgba(184,107,255,.14), rgba(255,79,216,.06));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(184,107,255,.15);
+      overflow:hidden;
+    }
+
+    .frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,.02),
+          rgba(255,255,255,.02) 2px,
+          transparent 2px,
+          transparent 12px
+        );
+      opacity:.25;
+      pointer-events:none;
+    }
+
+    /* Contenido carta */
+    .letter{
+      position:relative;
+      z-index:2;
+      background: rgba(15,11,28,.88);
+      border: 1px solid rgba(184,107,255,.18);
+      border-radius:22px;
+      padding:34px 32px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Encabezado */
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:18px;
+      margin-bottom:22px;
+      padding-bottom:18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .date{
+      font-size:14px;
+      letter-spacing:.6px;
+      color: var(--muted);
+      text-transform: uppercase;
+      line-height:1.4;
+    }
+
+    .seal{
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: radial-gradient(circle at 30% 30%, rgba(255,79,216,.35), rgba(122,44,255,.25));
+      border: 1px solid rgba(184,107,255,.30);
+      box-shadow: 0 0 25px rgba(184,107,255,.18);
+      font-size:20px;
+    }
+
+    /* Título "Mi amor" */
+    .greeting{
+      font-size:22px;
+      margin-bottom:18px;
+      color:#fff;
+      letter-spacing:.4px;
+    }
+
+    .text{
+      font-size:17px;
+      line-height:1.9;
+      color: rgba(242,236,255,.92);
+    }
+
+    .text p{
+      margin-bottom:16px;
+    }
+
+    strong{
+      color:#ffffff;
+      font-weight:700;
+      text-shadow: 0 0 10px rgba(184,107,255,.25);
+    }
+
+    /* Firma */
+    .signature{
+      margin-top:22px;
+      padding-top:18px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .signature .from{
+      font-size:16px;
+      color: rgba(205,185,255,.95);
+    }
+
+    .signature .name{
+      font-size:18px;
+      letter-spacing:.6px;
+      color:#fff;
+      font-weight:700;
+      text-transform: uppercase;
+    }
+
+    /* Frase neon final */
+    .neon-phrase{
+      margin-top:22px;
+      padding:20px 18px;
+      border-radius:18px;
+      border: 1px solid rgba(184,107,255,.35);
+      background: linear-gradient(135deg, rgba(122,44,255,.16), rgba(255,79,216,.08));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .neon-phrase::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(circle at 30% 30%, rgba(184,107,255,.35), transparent 60%);
+      filter: blur(14px);
+      opacity:.7;
+    }
+
+    .neon-phrase p{
+      position:relative;
+      z-index:2;
+      font-size:16px;
+      line-height:1.7;
+      color:#eedeff;
+      text-shadow:
+        0 0 6px rgba(184,107,255,.55),
+        0 0 14px rgba(122,44,255,.40),
+        0 0 22px rgba(255,79,216,.25);
+      font-weight:600;
+      letter-spacing:.4px;
+    }
+
+    /* Botón sorpresa */
+    .surprise-box{
+      margin-top:20px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      padding-top:10px;
+    }
+
+    .btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      padding:14px 22px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform: uppercase;
+      color:#fff;
+      background: linear-gradient(90deg, rgba(122,44,255,.95), rgba(255,79,216,.80));
+      box-shadow:
+        0 0 12px rgba(184,107,255,.35),
+        0 0 22px rgba(255,79,216,.20);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn:hover{
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 0 16px rgba(184,107,255,.55),
+        0 0 30px rgba(255,79,216,.28);
+    }
+
+    .countdown{
+      font-size:14px;
+      color: rgba(205,185,255,.95);
+      text-align:center;
+      padding:10px 14px;
+      border-radius:14px;
+      border: 1px solid rgba(184,107,255,.18);
+      background: rgba(27,18,48,.55);
+      width:100%;
+      max-width:420px;
+    }
+
+    /* Detalles decorativos */
+    .corner{
+      position:absolute;
+      width:120px;
+      height:120px;
+      border-radius:30px;
+      border:1px solid rgba(184,107,255,.12);
+      background: radial-gradient(circle at 30% 30%, rgba(184,107,255,.18), transparent 70%);
+      filter: blur(.2px);
+      opacity:.6;
+      z-index:1;
+    }
+
+    .c1{ top:-40px; left:-40px; transform: rotate(12deg); }
+    .c2{ bottom:-45px; right:-45px; transform: rotate(-14deg); }
+
+    @media (max-width:520px){
+      .letter{ padding:26px 20px; }
+      .greeting{ font-size:20px; }
+      .text{ font-size:16px; }
+      .seal{ width:48px; height:48px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="aurora"></div>
+
+  <div class="frame">
+    <div class="corner c1"></div>
+    <div class="corner c2"></div>
+
+    <div class="letter">
+      <div class="top">
+        <div class="date">Sábado, 11 de abril de 2026 — Noche</div>
+        <div class="seal">💜</div>
+      </div>
+
+      <div class="greeting">Mi amor,</div>
+
+      <div class="text">
+        <p>
+          Esta noche siento una necesidad inmensa de escribirte… de acercarme a ti aunque sea con palabras, de tocar tu corazón
+          con cada línea como si fueran mis manos buscándote despacio, con ternura y con deseo.
+        </p>
+
+        <p>
+          No sé en qué momento te volviste tan esencial para mí… pero lo hiciste. Y ahora estás en todo: en mis pensamientos cuando estoy solo,
+          en mi calma cuando el mundo pesa, en mi sonrisa cuando recuerdo tu voz… y en esa parte de mí que solo tú sabes despertar.
+        </p>
+
+        <p>
+          Porque tú no eres solo mi novia… tú eres mi debilidad más bonita. Eres esa persona que con una mirada puede desordenarme el alma,
+          que con un abrazo puede calmarme la vida entera, y que con un beso podría hacer que el tiempo se detenga sin pedir permiso.
+        </p>
+
+        <p>
+          Esta noche te extraño… pero no de una forma simple. Te extraño con el cuerpo, con el corazón, con esa ansiedad dulce de querer tenerte cerca.
+          Te extraño como se extraña lo que se ama de verdad: con intensidad, con ganas, con una pasión que no se puede esconder.
+        </p>
+
+        <p>
+          Y mientras escribo esto, no puedo evitar imaginarte… imaginar tu rostro, tus labios, tu piel, tu forma de ser tan tuya, tan perfecta para mí.
+          Me dan ganas de tenerte aquí, de mirarte a los ojos y decirte sin miedo que me tienes completamente, que me haces sentir cosas que nadie más ha logrado en mi vida.
+        </p>
+
+        <p>
+          Yo quiero cuidarte, amarte, hacerte sentir deseada, especial… quiero que nunca dudes de lo que provocas en mí.
+          Porque tú me enciendes, me inspiras, me enamoras y me vuelves loco al mismo tiempo.
+        </p>
+
+        <p>
+          Y si supieras lo mucho que me gustas… no solo por lo hermosa que eres, sino por lo que eres conmigo.
+          Por cómo haces que mi corazón se rinda, por cómo tu presencia convierte cualquier momento en algo inolvidable.
+        </p>
+
+        <p>
+          Esta noche solo quiero que lo sepas: <strong>te amo con una intensidad que no se puede explicar</strong>, y <strong>te deseo con una pasión que solo crece cada día</strong>.
+          Eres mi pensamiento favorito… mi tentación más dulce… y mi amor más real.
+        </p>
+
+        <p>
+          Buenas noches, mi vida…<br>
+          ojalá pudiera dormir contigo abrazada a mí, sintiendo tu respiración cerca, y recordándote con besos que tú eres mi lugar favorito en el mundo.
+        </p>
+
+        <div class="signature">
+          <div class="from">Con todo lo que soy,</div>
+          <div class="from">tu amor. 💙✨</div>
+          <div class="name">JUAN KALETH MENDOZA PRIMERA 💜</div>
+        </div>
+
+        <div class="neon-phrase">
+          <p>
+            Y si algún día dudas de lo que significas para mí, solo recuerda esto: tú eres mi noche favorita, mi paz más intensa y mi deseo más sincero…
+            eres la persona que convirtió mis sentimientos en algo real, profundo y eterno, porque en cada latido mío hay un pedacito de ti,
+            y en cada sueño que tengo, siempre estás tú iluminándome con ese amor que solo tú sabes dar.
+          </p>
+        </div>
+
+        <div class="surprise-box">
+          <button class="btn" id="btnSorpresa">Sorpresa</button>
+          <div class="countdown" id="countdown">
+            ⏳ La sorpresa se desbloqueará a las 12:00 AM...
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CONFIGURA AQUÍ EL LINK DE LA OTRA CARTA CUANDO YA LO TENGAS:
+    const LINK_SORPRESA = "https://j8753741-eng.github.io/Feliz-cumplea-os-18/";
+
+    const btn = document.getElementById("btnSorpresa");
+    const countdownEl = document.getElementById("countdown");
+
+    function getNextMidnight() {
+      const now = new Date();
+      const midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0); // próxima medianoche
+      return midnight;
+    }
+
+    function formatTime(ms) {
+      const totalSeconds = Math.floor(ms / 1000);
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      const seconds = String(totalSeconds % 60).padStart(2, "0");
+      return `${hours}:${minutes}:${seconds}`;
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const midnight = getNextMidnight();
+      const diff = midnight - now;
+
+      if (diff <= 0) {
+        countdownEl.innerHTML = "💜 Ya está lista... puedes abrir tu sorpresa.";
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btn.style.filter = "none";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.style.opacity = "0.55";
+      btn.style.filter = "grayscale(30%)";
+
+      countdownEl.innerHTML = `⏳ Faltan <strong>${formatTime(diff)}</strong> para desbloquear la sorpresa.`;
+    }
+
+    btn.addEventListener("click", () => {
+      const now = new Date();
+      const midnight = getNextMidnight();
+
+      if (now < midnight) {
+        alert("💜 Aún no... espera hasta las 12:00 AM para desbloquearlo.");
+        return;
+      }
+
+      // Abre el link de la otra carta
+      window.open(LINK_SORPRESA, "_blank");
+    });
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+  </html>
