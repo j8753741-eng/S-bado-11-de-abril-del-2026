@@ -380,7 +380,7 @@
   // Próxima medianoche fija (NO se recalcula cada segundo)
   const now = new Date();
   const midnight = new Date(now);
-  midnight.setMinutes(now.getMinutes() + 1);
+  midnight.setSeconds(now.getSeconds() + 5);
 
   function formatTime(ms) {
     const totalSeconds = Math.floor(ms / 1000);
