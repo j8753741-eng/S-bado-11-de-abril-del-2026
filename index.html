@@ -371,64 +371,58 @@
     </div>
   </div>
 
-  <script>
-    // CONFIGURA AQUÍ EL LINK DE LA OTRA CARTA CUANDO YA LO TENGAS:
-    const LINK_SORPRESA = "https://j8753741-eng.github.io/Feliz-cumplea-os-18/";
+<script>
+  const LINK_SORPRESA = "https://j8753741-eng.github.io/Feliz-cumplea-os-18/";
 
-    const btn = document.getElementById("btnSorpresa");
-    const countdownEl = document.getElementById("countdown");
+  const btn = document.getElementById("btnSorpresa");
+  const countdownEl = document.getElementById("countdown");
 
-    function getNextMidnight() {
+  // Próxima medianoche fija (NO se recalcula cada segundo)
   const now = new Date();
   const midnight = new Date(now);
-  midnight.setSeconds(now.getSeconds() + 5); // se desbloquea en 5 segundos
-  return midnight;
+  midnight.setMinutes(now.getMinutes() + 1);
+
+  function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  function updateCountdown() {
+    const currentTime = new Date();
+    const diff = midnight - currentTime;
+
+    if (diff <= 0) {
+      countdownEl.innerHTML = "💜 Ya está lista... puedes abrir tu sorpresa.";
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.style.filter = "none";
+      return;
     }
 
-    function formatTime(ms) {
-      const totalSeconds = Math.floor(ms / 1000);
-      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-      const seconds = String(totalSeconds % 60).padStart(2, "0");
-      return `${hours}:${minutes}:${seconds}`;
+    btn.disabled = true;
+    btn.style.opacity = "0.55";
+    btn.style.filter = "grayscale(30%)";
+
+    countdownEl.innerHTML = `⏳ Faltan <strong>${formatTime(diff)}</strong> para desbloquear la sorpresa.`;
+  }
+
+  btn.addEventListener("click", () => {
+    const currentTime = new Date();
+
+    if (currentTime < midnight) {
+      alert("💜 Aún no... espera hasta las 12:00 AM para desbloquearlo.");
+      return;
     }
 
-    function updateCountdown() {
-      const now = new Date();
-      const midnight = getNextMidnight();
-      const diff = midnight - now;
+    window.open(LINK_SORPRESA, "_blank");
+  });
 
-      if (diff <= 0) {
-        countdownEl.innerHTML = "💜 Ya está lista... puedes abrir tu sorpresa.";
-        btn.disabled = false;
-        btn.style.opacity = "1";
-        btn.style.filter = "none";
-        return;
-      }
-
-      btn.disabled = true;
-      btn.style.opacity = "0.55";
-      btn.style.filter = "grayscale(30%)";
-
-      countdownEl.innerHTML = `⏳ Faltan <strong>${formatTime(diff)}</strong> para desbloquear la sorpresa.`;
-    }
-
-    btn.addEventListener("click", () => {
-      const now = new Date();
-      const midnight = getNextMidnight();
-
-      if (now < midnight) {
-        alert("💜 Aún no... espera hasta las 12:00 AM para desbloquearlo.");
-        return;
-      }
-
-      // Abre el link de la otra carta
-      window.open(LINK_SORPRESA, "_blank");
-    });
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 
 </body>
   </html>
